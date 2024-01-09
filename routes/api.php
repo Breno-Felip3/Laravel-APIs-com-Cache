@@ -1,19 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\{
+    CourseController,
+    ModuleController
+};
+
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+Route::apiResource('/courses/{course}/modules', ModuleController::class);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/courses', [CourseController::class, 'index']);
+Route::post('/courses', [CourseController::class, 'store']);
+Route::get('/courses/{uuid}', [CourseController::class, 'show']);
+Route::delete('/courses/{uuid}', [CourseController::class, 'destroy']);
+Route::put('/course/{uuid}', [CourseController::class, 'update']);
+
+Route::get('/', function(){
+    return response()->json(['message' => 'ok']);
 });
