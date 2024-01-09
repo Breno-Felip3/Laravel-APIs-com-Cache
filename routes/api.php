@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\Api\{
     CourseController,
+    LessonController,
     ModuleController
 };
 
 use Illuminate\Support\Facades\Route;
+
+Route::apiResource('/modules/{module}/lessons', LessonController::class);
 
 Route::apiResource('/courses/{course}/modules', ModuleController::class);
 
