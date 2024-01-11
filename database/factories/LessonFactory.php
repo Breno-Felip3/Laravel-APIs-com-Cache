@@ -21,7 +21,7 @@ class LessonFactory extends Factory
 
     public function definition(): array
     {
-        $name = $this->fake()->unique()->name();
+        $name = $this->faker->unique()->name();
 
         return [
             'module_id' => Module::factory(),
