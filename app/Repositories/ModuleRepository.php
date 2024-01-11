@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Module;
+use Illuminate\Support\Facades\Cache;
 
 class ModuleRepository
 {
@@ -47,7 +48,9 @@ class ModuleRepository
     {
         $module = $this->getModuleByUuid($uuid_module);
 
-        $data['course_id'] = $courseId;     
+        $data['course_id'] = $courseId;  
+        
+        Cache::forget('courses');
 
         return $module->update($data);
     }
@@ -55,6 +58,8 @@ class ModuleRepository
     public function deleteModuleByUuid($uuid_module)
     {
         $module = $this->getModuleByUuid($uuid_module);
+
+        Cache::forget('courses');
 
         return $module->delete();
     }
